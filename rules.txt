@@ -1,0 +1,21 @@
+public function rules()
+{
+    return array(
+        // array('username, email', 'required'), // Remove these fields from required!!
+        array('email', 'email'),
+        array('username', 'my_username'), // do it below any validation of username and email field
+		array('password', 'my_password'),
+    );
+}
+
+public function my_username($attribute_name, $params)
+{
+    if (empty($this->username)) 
+	{
+        $this->addError($attribute_name, Yii::t('user', 'At least 1 of the field must be filled up properly'));
+
+        return false;
+    }
+
+    return true;
+}
